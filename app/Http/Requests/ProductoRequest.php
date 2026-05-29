@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductoRequest extends FormRequest
 {
@@ -12,7 +13,7 @@ class ProductoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,7 +24,26 @@ class ProductoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nombre' => 'required',
+            'sku' => [
+                'required',
+                Rule::unique('productos', 'sku')->ignore($this->producto),
+            ],
+            'precio' => 'required|numeric|min:0',
+            'stock' => 'required|integer|min:0',
+            'categoria_id' => 'required|exists:categorias,id',
+            'disponible' => 'boolean',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'nombre.required' => 'El nombre es obligatorio',
+            'sku.required' => 'El codigo es obligatorio',
+            'sku.unique' => 'El codigo ya existe',
+            'precio.min' => 'El precio no puede ser negativo',
+            'stock.min' => 'El stock no puede ser negativo',
         ];
     }
 }
