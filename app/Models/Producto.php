@@ -15,12 +15,12 @@ class Producto extends Model
         'sku',
         'precio',
         'stock',
-        'disponible'
+        'disponible',
     ];
 
     protected $casts = [
         'precio' => 'decimal:2',
-        'disponible' => 'boolean'
+        'disponible' => 'boolean',
     ];
 
     public function categoria()

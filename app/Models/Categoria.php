@@ -12,11 +12,11 @@ class Categoria extends Model
     protected $fillable = [
         'nombre',
         'descripcion',
-        'activo'
+        'activo',
     ];
 
     protected $casts = [
-        'activo' => 'boolean'
+        'activo' => 'boolean',
     ];
 
     public function productos()

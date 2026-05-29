@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-
 use App\Models\Categoria;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -17,11 +16,11 @@ class CategoriaFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-{
-    return [
-        'nombre' => fake()->unique()->word(),
-        'descripcion' => fake()->sentence(),
-        'activo' => true
-    ];
-}
+    {
+        return [
+            'nombre' => fake()->unique()->word(),
+            'descripcion' => fake()->sentence(),
+            'activo' => true,
+        ];
+    }
 }

@@ -9,21 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-   public function up(): void
-{
-    Schema::create('categorias', function (Blueprint $table) {
+    public function up(): void
+    {
+        Schema::create('categorias', function (Blueprint $table) {
 
-        $table->id();
+            $table->id();
 
-        $table->string('nombre',100)->unique();
+            $table->string('nombre', 100)->unique();
 
-        $table->text('descripcion')->nullable();
+            $table->text('descripcion')->nullable();
 
-        $table->boolean('activo')->default(true);
+            $table->boolean('activo')->default(true);
 
-        $table->timestamps();
-    });
-}
+            $table->timestamps();
+        });
+    }
 
     /**
      * Reverse the migrations.
