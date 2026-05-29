@@ -25,6 +25,8 @@
 
 <section class="panel">
     <div class="panel-body">
+        <p class="form-intro">Actualiza los datos del producto y conserva la informacion precisa para ventas y control de stock.</p>
+
         <form action="{{ route('productos.update', $producto) }}" method="POST">
             @csrf
             @method('PUT')

@@ -25,6 +25,8 @@
 
 <section class="panel">
     <div class="panel-body">
+        <p class="form-intro">Completa la informacion principal del producto. El codigo debe ser unico para mantener ordenado el inventario.</p>
+
         <form action="{{ route('productos.store') }}" method="POST">
             @csrf
 

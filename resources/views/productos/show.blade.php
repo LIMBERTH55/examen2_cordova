@@ -22,6 +22,14 @@
 
 <section class="panel">
     <div class="panel-body">
+        <div class="product-summary">
+            <span class="product-avatar">{{ strtoupper(substr($producto->nombre, 0, 1)) }}</span>
+            <div>
+                <h2>{{ $producto->nombre }}</h2>
+                <p>Producto registrado en {{ $producto->categoria->nombre }} con codigo <span class="sku">{{ $producto->sku }}</span>.</p>
+            </div>
+        </div>
+
         <div class="details-grid">
             <div class="detail-item">
                 <p class="detail-label">Categoria</p>

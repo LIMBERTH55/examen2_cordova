@@ -5,7 +5,7 @@
 <div class="page-header">
     <div>
         <h1 class="page-title">Productos</h1>
-        <p class="page-subtitle">Administra el inventario y sus categorias.</p>
+        <p class="page-subtitle">Administra el inventario, precios y disponibilidad por categoria.</p>
     </div>
 
     <a class="btn btn-primary" href="{{ route('productos.create') }}">
@@ -13,9 +13,29 @@
     </a>
 </div>
 
+<div class="stats-grid">
+    <div class="surface stat-card stat-card-total">
+        <p class="stat-label">Total productos</p>
+        <p class="stat-value">{{ $productos->count() }}</p>
+    </div>
+
+    <div class="surface stat-card stat-card-success">
+        <p class="stat-label">Disponibles</p>
+        <p class="stat-value">{{ $productos->where('disponible', true)->count() }}</p>
+    </div>
+
+    <div class="surface stat-card stat-card-stock">
+        <p class="stat-label">Stock total</p>
+        <p class="stat-value">{{ $productos->sum('stock') }}</p>
+    </div>
+</div>
+
 <section class="panel">
     <div class="toolbar">
-        <strong>{{ $productos->count() }} productos registrados</strong>
+        <div class="toolbar-title">
+            <strong>Inventario registrado</strong>
+            <span>{{ $productos->count() }} productos en el catalogo</span>
+        </div>
     </div>
 
     @if($productos->isEmpty())
@@ -43,7 +63,13 @@
                 @foreach($productos as $producto)
                 <tr>
                     <td>
-                        <strong>{{ $producto->nombre }}</strong>
+                        <div class="product-name">
+                            <span class="product-avatar">{{ strtoupper(substr($producto->nombre, 0, 1)) }}</span>
+                            <div class="product-meta">
+                                <strong>{{ $producto->nombre }}</strong>
+                                <span class="sku">ID {{ $producto->id }}</span>
+                            </div>
+                        </div>
                     </td>
                     <td>
                         <span class="sku">{{ $producto->sku }}</span>
