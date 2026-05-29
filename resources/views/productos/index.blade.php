@@ -70,7 +70,7 @@
                                 class="inline-form"
                                 action="{{ route('productos.destroy', $producto) }}"
                                 method="POST"
-                                onsubmit="return confirm('Eliminar producto?')"
+                                onsubmit="return confirm('Seguro que desea eliminar este producto?')"
                             >
                                 @csrf
                                 @method('DELETE')
