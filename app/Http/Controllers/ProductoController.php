@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\ProductoRequest;
+use App\Models\Categoria;
+use App\Models\Producto;
 
 class ProductoController extends Controller
 {
@@ -11,7 +13,9 @@ class ProductoController extends Controller
      */
     public function index()
     {
-        //
+        $productos = Producto::with('categoria')->get();
+
+        return view('productos.index', compact('productos'));
     }
 
     /**
@@ -19,46 +23,65 @@ class ProductoController extends Controller
      */
     public function create()
     {
-        //
+        $categorias = Categoria::all();
+
+        return view('productos.create', compact('categorias'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductoRequest $request)
     {
-        //
+        Producto::create($request->validated());
+
+        return redirect()
+            ->route('productos.index')
+            ->with('success', 'Producto creado correctamente');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Producto $producto)
     {
-        //
+        return view('productos.show', compact('producto'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Producto $producto)
     {
-        //
+        $categorias = Categoria::all();
+
+        return view('productos.edit', compact('producto', 'categorias'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
+    public function update(
+        ProductoRequest $request,
+        Producto $producto
+    ) {
+        $producto->update($request->validated());
+
+        return redirect()
+            ->route('productos.index')
+            ->with('success', 'Producto actualizado');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
+    public function destroy(
+        Producto $producto
+    ) {
+        $producto->delete();
+
+        return redirect()
+            ->route('productos.index')
+            ->with('success', 'Producto eliminado');
     }
 }
